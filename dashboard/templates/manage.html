@@ -1,0 +1,119 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+{% if user.is_authenticated %}
+
+    <div class="page-breadcrumb">
+        <div class="row">
+            <div class="col-12 d-flex no-block align-items-center">
+                <h3 class="page-title">Manage</h3>
+                <div class="ml-auto text-right">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="{% url 'dashboard:home' %}">Home</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Library</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ============================================================== -->
+    <!-- End Bread crumb and right sidebar toggle -->
+    <!-- ============================================================== -->
+    <!-- Container fluid  -->
+    <!-- ============================================================== -->
+    <div class="container-fluid">
+        <!-- ============================================================== -->
+        <!-- Start Page Content -->
+        <!-- ============================================================== -->
+        <!-- Company Info and Company Members -->
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title m-b-0">Company Info</h5>
+                    </div>
+                    <table class="table table-borderless">
+                        <tbody>
+                        <tr>
+                            <td>Name</td>
+                            <td>Chin Peng Printing</td>
+                        </tr>
+                        <tr>
+                            <td>Company ID</td>
+                            <td>dasdiuhcia</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title m-b-0">Company Members</h5>
+                    </div>
+                    <table class="table table-borderless">
+                        <tbody>
+                        <tr>
+                            <td>John Smith</td>
+                            <td>Security Administrator</td>
+                            <td>Status</td>
+                        </tr>
+                        <tr>
+                            <td>John Doe</td>
+                            <td>Senior Executive</td>
+                            <td>Status</td>
+                        </tr>
+                         <tr>
+                            <td>Johnny Dope</td>
+                            <td>Executive</td>
+                            <td>Status</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+                <!-- ============================================================== -->
+                <!-- Information 1 -->
+                <!-- ============================================================== -->
+
+        <div class="row">
+            <div class="col-md-3">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Site List</h5>
+                        <p>Choose site list</p>
+                    </div>
+                </div>
+            </div>
+                <!-- ============================================================== -->
+                <!-- End Information 1 -->
+                <!-- ============================================================== -->
+                <!-- Information 2 -->
+                <!-- ============================================================== -->
+
+            <div class="col-md-9">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Deployed USB Scanner</h5>
+                        <p>Will be able to choose. Also can change site location by selecting from site list</p>
+                    </div>
+                </div>
+            </div>
+       </div>
+    </div>
+                <!-- ============================================================== -->
+                <!-- End Information 2 -->
+                <!-- ============================================================== -->
+
+
+
+    {% else %}
+    <h1>Please log in to view</h1>
+    <a href="{% url 'login' %}">Login Here</a>
+    {% endif %}
+{% endblock content%}

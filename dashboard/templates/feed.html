@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load static %}
+{% block extra_css %}
+    <style xmlns="http://www.w3.org/1999/html">
+    </style>
+{% endblock %}
+{% block page_title %}
+ Widgets
+{% endblock %}
+
+{% block content %}
+    <div class="page-breadcrumb">
+        <div class="row">
+            <div class="col-12 d-flex no-block align-items-center">
+                <h3 class="page-title">Recent Scans</h3>
+                <div class="ml-auto text-right">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="{% url 'dashboard:home' %}">Home</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Feed</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid">
+        <div class="row">
+
+
+        <!-- ============================================================== -->
+        <!-- card new -->
+        <!-- ============================================================== -->
+
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title m-b-0">Tasks</h5>
+                    </div>
+                    <table class="table table-bordered">
+                        <thead class="thead">
+                        <tr>
+                            <th scope="col">Status</th>
+                            <th scope="col">Time</th>
+                            <th scope="col">Location</th>
+                            <th scope="col">Office</th>
+                            <th scope="col">City</th>
+                            <th scope="col">Actions</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>
+                                <a>
+                                    <i class="mdi mdi-alert"></i>
+                                </a>
+                            </td>
+                            <td>January 19, 5:42:20</td>
+                            <td>Marketing Division</td>
+                            <td>Chin Peng Printing</td>
+                            <td>Kuala Lumpur</td>
+                            <td>
+                                <button class="btn btn-light">view</button>
+                                <button class="btn btn-success">Download</button>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

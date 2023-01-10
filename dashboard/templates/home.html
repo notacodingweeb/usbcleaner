@@ -1,0 +1,170 @@
+{% extends 'base.html' %}
+{% load static %}
+
+    {% block content %}
+    {% if user.is_authenticated %}
+            <!-- ============================================================== -->
+            <!-- Bread crumb and right sidebar toggle -->
+            <!-- ============================================================== -->
+             <div class="page-breadcrumb">
+                <div class="row">
+                    <div class="col-12 d-flex no-block align-items-center">
+                        <h3 class="page-title">Home</h3>
+                        <div class="ml-auto text-right">
+                            <nav aria-label="breadcrumb">
+                                 <ol class="breadcrumb">
+                                    <li class="breadcrumb-item"><a href="{% url 'dashboard:home' %}">Home</a></li>
+                                     <li class="breadcrumb-item active" aria-current="page">Home</li>
+                                </ol>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- ============================================================== -->
+            <!-- End Bread crumb and right sidebar toggle -->
+            <!-- ============================================================== -->
+            <!-- Container fluid  -->
+            <!-- ============================================================== -->
+            <div class="container-fluid">
+                <!-- ============================================================== -->
+                <!-- Scan Information & Scan Breakdown  -->
+                <div class="row">
+                <div class="col-md-12 mb-3">
+                    <div class="card bg-dark text-white h-100">
+                        <div class="card-body py-6">Scan Information</div>
+                        <div class="card-footer d-flex">
+                            <a href="{% url 'dashboard:scan_info' %}">View Details</a>
+                        </div>
+                    </div>
+                </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="card h-100">
+                            <div class="card-header">
+                                <span class="mdi mdi-chart-pie"></span>
+                                Pie Chart
+                            </div>
+                            <div class="card-body">
+                                <canvas id="myPieChart" width="400" height="400"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card h-100">
+                            <div class="card-header">
+                                <span class="mdi mdi-chart-bar"></span>
+                                Bar Chart
+                            </div>
+                            <div class="card-body">
+                                <canvas id="myBarChart" width="400" height="400"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 mb-3">
+                        <div class="card">
+                            <div class="card-header">
+                                <span class="mdi mdi-folder-multiple-outline"></span> Feed
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table
+                                        id="example"
+                                        class="table table-striped data-table"
+                                        style="width: 100%"
+                                    >
+                                        <thead>
+                                            <tr>
+                                                <th>Status</th>
+                                                <th>Time</th>
+                                                <th>Location</th>
+                                                <th>Office</th>
+                                                <th>City</th>
+                                                <th>Actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>{{ message_type }}</td>
+                                                <td>{{ scan_time }}</td>
+                                                <td>{{ site_name }}</td>
+                                                <td>*</td>
+                                                <td>*</td>
+                                                <td>
+                                                    <button class="btn btn-light">view</button>
+                                                    <button class="btn btn-success">Download</button>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!---------------Script for Pie Chart----------------------------------------------->
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+            <script>
+            var xValues = ["Good Files", "Warning Files", "Bad Files"];
+            var yValues = [55, 49, 44];
+            var barColors = [
+              "#00FF00",
+              "#FFFF00",
+              "#FF0000"
+            ];
+
+            new Chart("myPieChart", {
+              type: "pie",
+              data: {
+                labels: xValues,
+                datasets: [{
+                  backgroundColor: barColors,
+                  data: yValues
+                }]
+              },
+              options: {
+                title: {
+                  display: true,
+                  text: "Scan result summary"
+                }
+              }
+            });
+            </script>
+            <!--------------Script for Bar Chart------------------------------------------------>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+            <script>
+            var xValues = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December", ];
+            var yValues = [55, 49, 44, 24, 15];
+            var barColors = ["red", "red", "red", "red", "red", "red", "red", "red", "red", "red", "red", "red",];
+
+            new Chart("myBarChart", {
+              type: "bar",
+              data: {
+                labels: xValues,
+                datasets: [{
+                  backgroundColor: barColors,
+                  data: yValues
+                }]
+              },
+              options: {
+                legend: {display: false},
+                title: {
+                  display: true,
+                  text: "Bad Files recurrence in a month"
+                }
+              }
+            });
+            </script>
+
+
+    {% else %}
+    <h1>Please log in to view</h1>
+    <a href="{% url 'login' %}">Login Here</a>
+    {% endif %}
+
+    {% endblock content %} 
+       

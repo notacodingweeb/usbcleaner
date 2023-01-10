@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load static %}
+
+  {% block content %}
+
+  {% load crispy_forms_tags %}
+          <div class="container-fluid">
+                    <!-- ============================================================== -->
+                    <!-- Scan Information & Scan Breakdown  -->
+
+                  <!--Login-->
+                  <div class="container py-5">
+                    <h1>Login</h1>
+
+                     <form action="" method=POST>
+                      {% csrf_token %}
+                      <div class="mb-3">
+                        <label class="form-label">Username</label>
+                        <input type="text" class="form-control" name="username" aria-describedby="emailHelp">
+                      </div>
+                      <div class="mb-3">
+                        <label class="form-label">Password</label>
+                        <input type="password" class="form-control" name="password">
+                      </div>
+                      <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                    <p class="text-center">Don't have an account? <a href="{% url 'register_user' %}">Create an account</a>.</p>
+                  </div>
+          </div>
+  {% endblock content%}

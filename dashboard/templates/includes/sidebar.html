@@ -1,0 +1,18 @@
+{% load static %}
+
+  <aside class="left-sidebar scrollable ps-container ps-theme-default ps-active-y" data-sidebarbg="skin5">
+            <!-- Sidebar scroll-->
+            <div class="scroll-sidebar">
+                <!-- Sidebar navigation-->
+                <nav class="sidebar-nav">
+                    <ul id="sidebarnav" class="p-t-30">
+                         {% if user.is_authenticated %}
+                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{% url 'dashboard:home' %}" aria-expanded="false"><i class="mdi mdi-home"></i><span class="hide-menu">Home</span></a></li>
+                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{% url 'dashboard:scan_info' %}" aria-expanded="false"><i class="mdi mdi-security"></i><span class="hide-menu">Scan Information</span></a></li>
+                        {% endif %}
+                            </ul>
+                </nav>
+                <!-- End Sidebar navigation -->
+            </div>
+            <!-- End Sidebar scroll-->
+        </aside>

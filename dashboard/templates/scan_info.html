@@ -1,0 +1,215 @@
+{% extends 'base.html' %}
+{% load static %}
+
+    {% block content %}
+    {% if user.is_authenticated %}
+
+            <!-- ============================================================== -->
+            <!-- Bread crumb and right sidebar toggle -->
+            <!-- ============================================================== -->
+             <div class="page-breadcrumb">
+                <div class="row">
+                    <div class="col-12 d-flex no-block align-items-center">
+                        <h3 class="page-title">Scan Information</h3>
+                        <div class="ml-auto text-right">
+                            <nav aria-label="breadcrumb">
+                                 <ol class="breadcrumb">
+                                    <li class="breadcrumb-item"><a href="{% url 'dashboard:home' %}">Home</a></li>
+                                     <li class="breadcrumb-item active" aria-current="page">Scan Information</li>
+                                </ol>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- ============================================================== -->
+            <!-- End Bread crumb and right sidebar toggle -->
+            <!-- ============================================================== -->
+            <!-- Container fluid  -->
+            <!-- ============================================================== -->
+            <div class="container-fluid">
+                <!-- ============================================================== -->
+                <!-- Scan Information & Scan Breakdown  -->
+            <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title m-b-">Scan Metadata</h5>
+                    </div>
+                    <table class="table table-borderless">
+                        <tbody>
+                        <tr>
+                            <th>Scan Time:</th>
+                            <td>{{ scan_time }}</td>
+                        </tr>
+                        <tr>
+                            <th>Site Name:</th>
+                            <td>{{ site_name }}</td>
+                        </tr>
+                        <tr>
+                            <th>Scan UID:</th>
+                            <td>{{ uid }}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            </div>
+                       <!-- ============================================================== -->
+                <!-- Information 1 -->
+                <!-- ============================================================== -->
+                <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title m-b-0">USB Information</h5>
+                        </div>
+                        <table class="table table-borderless">
+                            <tbody>
+                            <tr>
+                                <td>USB Volume Label</td>
+                                <td>*</td>
+                            </tr>
+                            <tr>
+                                <td>USB Size</td>
+                                <td>*</td>
+                            </tr>
+                            <tr>
+                                <td>USB Vendor</td>
+                                <td>*</td>
+                            </tr>
+                            <tr>
+                                <td>USB File Format</td>
+                                <td>*</td>
+                            </tr>
+                            <tr>
+                                <td>USB Serial</td>
+                                <td>*</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                </div>
+                <!-- ============================================================== -->
+                <!-- End Information 1 -->
+                <!-- ============================================================== -->
+            <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title m-b-0">Scan Log</h5>
+                    </div>
+                    <table class="table table-borderless">
+                        <tbody>
+                            <tr>
+                            <th>File Path:</th>
+                            <td>{{ filepath }}</td>
+                        </tr>
+                        <tr>
+                            <th>Total Score:</th>
+                            <td>{{ total_score }}</td>
+                        </tr>
+                        <tr>
+                            <th>File Type:</th>
+
+                            <td>{{ filetype }}</td>
+                        </tr>
+                        <tr>
+                            <th>File Size:</th>
+                            <td>{{ filesize }}</td>
+                        </tr>
+                        <tr>
+                            <th>First Byte String:</th>
+                            <td>{{ fbstring }}</td>
+                        </tr>
+                        <tr>
+                            <th>Hash String:</th>
+                            <td>{{ hashstring }}</td>
+                        </tr>
+                        <tr>
+                            <th>Age String:</th>
+                            <td>{{ fileAge }}</td>
+                        </tr>
+                        <tr>
+                            <th>Reasons:</th>
+                            <td>{{ reasons }</td>
+                        </tr>
+                        <tr>
+                            <th>Message Type:</th>
+                            <td>{{ message_type }}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    </div>
+                </div>
+            </div>
+            </div>
+
+                <!-- Information 2 -->
+                <!-- ============================================================== -->
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card border-danger">
+                        <div class="card-header">
+                            <h5 class="card-title m-b-0">Identified Malware: <Span id="alert">{{ alert_count }}</Span></h5>
+                        </div>
+                        <div class="card-body text-danger" style=" max-height: 50vh; overflow-y : auto">
+                            {% for alert in alerts %}
+                            <p class="card-text">{{ alert.filePath }}</p>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+                <!-- ============================================================== -->
+                <!-- End Information 2 -->
+                <!-- ============================================================== -->
+                <!-- Information 3 -->
+                <!-- ============================================================== -->
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card border-success">
+                            <div class="card-header">
+                                <h5 class="card-title m-b-0">Good Files: <Span id="good">{{ good_count }}</Span></h5>
+                              </div>
+                            <div class="card-body text-success" style=" max-height: 50vh; overflow-y : auto">
+                                {% for good in goods %}
+                                <p class="card-text">{{ good.filePath }}</p>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <script type="text/javascript">
+                    google.charts.load("current", {packages:["corechart"]});
+                    google.charts.setOnLoadCallback(drawChart);
+                    function drawChart() {
+                      var data = google.visualization.arrayToDataTable([
+                        ['Task', 'Hours per Day'],
+                        ['Bad',     "{{alert_count}}"],
+                        ['Good',      "{{good_count}}"]
+                      ]);
+              
+                      var options = {
+                        title: 'Good Vs Bad Files',
+                        pieHole: 0.4,
+                      };
+              
+                      var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+                      chart.draw(data, options);
+                    }
+                  </script>
+                <!-- ============================================================== -->
+                <!-- End Information 3 -->
+                <!-- ============================================================== -->
+
+    {% else %}
+    <h1>Please log in to view</h1>
+    <a href="{% url 'login' %}">Login Here</a>
+    {% endif %}
+
+    {% endblock content %}
